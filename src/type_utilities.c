@@ -13,7 +13,7 @@
 // limitations under the License.
 
 #include <micro_ros_utilities/type_utilities.h>
-
+#include <stdio.h>
 #include <string.h>
 
 #include <rosidl_typesupport_introspection_c/identifier.h>

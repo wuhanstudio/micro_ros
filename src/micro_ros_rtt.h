@@ -11,7 +11,7 @@
 
 bool   rtt_transport_open(struct uxrCustomTransport * transport);
 bool   rtt_transport_close(struct uxrCustomTransport * transport);
-size_t rtt_transport_write(struct uxrCustomTransport* transport, uint8_t * buf, size_t len, uint8_t * err);
+size_t rtt_transport_write(struct uxrCustomTransport* transport, const uint8_t * buf, size_t len, uint8_t * err);
 size_t rtt_transport_read(struct uxrCustomTransport* transport, uint8_t* buf, size_t len, int timeout, uint8_t* err);
 int clock_gettime(clockid_t unused, struct timespec *tp);
 

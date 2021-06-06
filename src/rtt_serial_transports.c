@@ -44,7 +44,7 @@ bool rtt_transport_close(struct uxrCustomTransport * transport)
     return 0;
 }
 
-size_t rtt_transport_write(struct uxrCustomTransport * transport, uint8_t *buf, size_t len, uint8_t *errcode)
+size_t rtt_transport_write(struct uxrCustomTransport * transport, const uint8_t *buf, size_t len, uint8_t *errcode)
 {
 //    (void)errcode;
 //    size_t sent = Serial.write(buf, len);
