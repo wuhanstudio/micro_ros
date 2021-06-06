@@ -4,7 +4,7 @@
 
 // ---- Build fixes -----
 //Removing __attribute__ not supported by gcc-arm-none-eabi-5_4
-#define __attribute__(x)
+// #define __attribute__(x)
 
 #include <uxr/client/transport.h>
 #include <rmw_microros/rmw_microros.h>
