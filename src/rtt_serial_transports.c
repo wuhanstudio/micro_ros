@@ -4,6 +4,22 @@
 #include <stdbool.h>
 #include <sys/time.h>
 
+#define DBG_SECTION_NAME  "micro_ros_serial"
+#define DBG_LEVEL         DBG_LOG
+#include <rtdbg.h>
+
+static struct rt_semaphore rx_sem;
+static rt_device_t micro_ros_serial;
+
+#ifndef MICRO_ROS_SERIAL_NAME
+    #define MICRO_ROS_SERIAL_NAME "uart2"
+#endif
+
+#ifndef MICRO_ROS_SERIAL_TIMEOUT
+    #define MICRO_ROS_SERIAL_TIMEOUT 500
+#endif
+
+
 // int clock_gettime(clockid_t unused, struct timespec *tp) __attribute__ ((weak));
 // bool rtt_transport_open(struct uxrCustomTransport * transport) __attribute__ ((weak));
 // bool rtt_transport_close(struct uxrCustomTransport * transport) __attribute__ ((weak));
@@ -32,30 +48,50 @@ int clock_gettime(clockid_t unused, struct timespec *tp)
     return 0;
 }
 
+static rt_err_t uart_input(rt_device_t dev, rt_size_t size)
+{
+    rt_sem_release(&rx_sem);
+
+    return RT_EOK;
+}
+
 bool rtt_transport_open(struct uxrCustomTransport * transport)
 {
-//    Serial.begin(115200);
-    return 0;
+    micro_ros_serial = rt_device_find(MICRO_ROS_SERIAL_NAME);
+    if (!micro_ros_serial)
+    {
+        LOG_E("Failed to open device %s", MICRO_ROS_SERIAL_NAME);
+        return 0;
+    }
+    rt_sem_init(&rx_sem, "micro_ros_rx_sem", 0, RT_IPC_FLAG_FIFO);
+    rt_device_open(micro_ros_serial, RT_DEVICE_FLAG_INT_RX);
+    rt_device_set_rx_indicate(micro_ros_serial, uart_input);
+    return 1;
 }
 
 bool rtt_transport_close(struct uxrCustomTransport * transport)
 {
-//    Serial.end();
+    rt_device_close(micro_ros_serial);
+    rt_sem_detach(&rx_sem);
     return 0;
 }
 
 size_t rtt_transport_write(struct uxrCustomTransport * transport, const uint8_t *buf, size_t len, uint8_t *errcode)
 {
-//    (void)errcode;
-//    size_t sent = Serial.write(buf, len);
-//    return sent;
-  return 0;
+    return rt_device_write(micro_ros_serial, 0, buf, len);
 }
 
 size_t rtt_transport_read(struct uxrCustomTransport * transport, uint8_t *buf, size_t len, int timeout, uint8_t *errcode)
 {
-//    (void)errcode;
-//    Serial.setTimeout(timeout);
-//    return Serial.readBytes((char *)buf, len);
-  return 0;
+    int tick = rt_tick_get();
+    while (rt_device_read(micro_ros_serial, -1, buf, len) != len)
+    {
+        rt_sem_take(&rx_sem, timeout);
+        if( (rt_tick_get() - tick) > timeout)
+        {
+            LOG_E("Read timeout");
+            return 0;
+        }
+    }
+    return len;
 }

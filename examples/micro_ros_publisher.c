@@ -22,54 +22,57 @@ rcl_timer_t timer;
 
 void timer_callback(rcl_timer_t * timer, int64_t last_call_time)
 {  
-  // RCLC_UNUSED(last_call_time);
-  if (timer != NULL) 
-  {
-    rcl_publish(&publisher, &msg, NULL);
-    msg.data++;
-  }
+    // RCLC_UNUSED(last_call_time);
+    if (timer != NULL) 
+    {
+        rcl_publish(&publisher, &msg, NULL);
+        msg.data++;
+    }
 }
 
 void microros_publisher(int argc, char* argv[]) 
 {
-  set_microros_transports();
-  
-  rt_thread_mdelay(2000);
+    set_microros_transports();
 
-  allocator = rcl_get_default_allocator();
+    rt_thread_mdelay(2000);
 
-  //create init_options
-  // rclc_support_init(&support, 0, NULL, &allocator);
+    allocator = rcl_get_default_allocator();
 
-  // create node
-  // rclc_node_init_default(&node, "micro_ros_arduino_node", "", &support);
+    //create init_options
+    if (rclc_support_init(&support, 0, NULL, &allocator) != RCL_RET_OK)
+    {
+        rt_kprintf("Failed to initialize\n");
+    };
 
-  // create publisher
-  // rclc_publisher_init_default(
-  //   &publisher,
-  //   &node,
-  //   ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
-  //   "micro_ros_rtt_node_publisher");
+    // create node
+    // rclc_node_init_default(&node, "micro_ros_arduino_node", "", &support);
 
-  // create timer,
-  // const unsigned int timer_timeout = 1000;
-  // rclc_timer_init_default(
-  //   &timer,
-  //   &support,
-  //   RCL_MS_TO_NS(timer_timeout),
-  //   timer_callback);
+    // create publisher
+    // rclc_publisher_init_default(
+    //   &publisher,
+    //   &node,
+    //   ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
+    //   "micro_ros_rtt_node_publisher");
 
-  // // create executor
-  // rclc_executor_init(&executor, &support.context, 1, &allocator);
-  // rclc_executor_add_timer(&executor, &timer);
+    // create timer,
+    // const unsigned int timer_timeout = 1000;
+    // rclc_timer_init_default(
+    //   &timer,
+    //   &support,
+    //   RCL_MS_TO_NS(timer_timeout),
+    //   timer_callback);
 
-  // msg.data = 0;
+    // // create executor
+    // rclc_executor_init(&executor, &support.context, 1, &allocator);
+    // rclc_executor_add_timer(&executor, &timer);
 
-  // while(1) 
-  // {
-  //   rt_thread_mdelay(100);
-  //   rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100));
-  // }
+    // msg.data = 0;
+
+    // while(1) 
+    // {
+    //   rt_thread_mdelay(100);
+    //   rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100));
+    // }
 
 }
 MSH_CMD_EXPORT(microros_publisher, microros publisher)
