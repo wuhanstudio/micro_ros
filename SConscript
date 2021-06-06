@@ -19,6 +19,9 @@ src     += Glob('examples/*.c')
 path   = [cwd]
 path   += [cwd + '/src']
 
+if GetDepend('ROSSERIAL_USING_SERVICE_CLIENT_UART'):
+    src    += Glob('examples/service_client.cpp')
+
 LOCAL_CCFLAGS = ''
 
 group = DefineGroup('microros', src, depend = [''], CPPPATH = path, LOCAL_CCFLAGS = LOCAL_CCFLAGS, LIBS = LIBS, LIBPATH = LIBPATH)

@@ -1,4 +1,7 @@
 #include <rtthread.h>
+
+#if defined MICRO_ROS_USE_SERIAL
+
 #include "micro_ros_rtt.h"
 #include <stdio.h>
 #include <stdbool.h>
@@ -145,3 +148,5 @@ size_t rtt_transport_read(struct uxrCustomTransport * transport, uint8_t *buf, s
 //    }
     return len;
 }
+
+#endif // MICRO_ROS_USE_SERIAL
