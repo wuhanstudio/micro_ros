@@ -46,4 +46,4 @@ data: 3
 
 - 更多 Example
 - 实现 UDP 连接
-- 测试更多 MCU:  Cortex-M0, Cortex-M4, Cortex-M7, i.mx. rt1062
+- 测试更多 MCU:  Cortex-M0, Cortex-M4, Cortex-M7
