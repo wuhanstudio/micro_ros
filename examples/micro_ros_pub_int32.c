@@ -45,22 +45,20 @@ static void microros_pub_int32(int argc, char* argv[])
 {
     set_microros_transports();
 
-    rt_thread_mdelay(2000);
-
     allocator = rcl_get_default_allocator();
 
     //create init_options
     if (rclc_support_init(&support, 0, NULL, &allocator) != RCL_RET_OK)
     {
         rt_kprintf("[micro_ros] failed to initialize\n");
-        return 0;
+        return;
     };
 
     // create node
     if (rclc_node_init_default(&node, "micro_ros_rtt_node", "", &support) != RCL_RET_OK)
     {
         rt_kprintf("[micro_ros] failed to create node\n");
-        return 0;
+        return;
     }
     rt_kprintf("[micro_ros] node created\n");
 
@@ -89,7 +87,7 @@ static void microros_pub_int32(int argc, char* argv[])
 
     msg.data = 0;
 
-    rt_thread_t thread = rt_thread_create("mr_pubint32", microros_pub_int32_thread_entry, RT_NULL, 2048, 5, 10);
+    rt_thread_t thread = rt_thread_create("mr_pubint32", microros_pub_int32_thread_entry, RT_NULL, 2048, 25, 10);
     if(thread != RT_NULL)
     {
         rt_thread_startup(thread);

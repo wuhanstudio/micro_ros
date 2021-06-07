@@ -70,7 +70,7 @@ static rt_device_t micro_ros_serial;
 // size_t rtt_transport_write(struct uxrCustomTransport * transport, uint8_t *buf, size_t len, uint8_t *errcode) __attribute__ ((weak));
 // size_t rtt_transport_read(struct uxrCustomTransport * transport, uint8_t *buf, size_t len, int timeout, uint8_t *errcode) __attribute__ ((weak));
 
-//#define micro_rollover_useconds 4294967295
+// #define micro_rollover_useconds 4294967295
 
 int clock_gettime(clockid_t unused, struct timespec *tp)
 {
@@ -140,15 +140,17 @@ size_t rtt_transport_read(struct uxrCustomTransport * transport, uint8_t *buf, s
             rt_sem_init(&rx_sem, "micro_ros_rx_sem", 0, RT_IPC_FLAG_FIFO);
             sem_initialized = 1;
         }
-        rt_sem_take(&rx_sem, timeout / 2);
-        rt_device_read(micro_ros_serial, -1, &buf[i], 1);
-        if( (rt_tick_get() - tick) > timeout)
+        if (rt_device_read(micro_ros_serial, -1, &buf[i], 1) != 1)
         {
-//            LOG_E("Read timeout");
+            rt_sem_take(&rx_sem, timeout / 4);
+            rt_device_read(micro_ros_serial, -1, &buf[i], 1);
+        }
+        if( (rt_tick_get() - tick) > timeout )
+        {
+            // LOG_E("Read timeout");
             return i;
         }
     }
-
     return len;
 }
 
