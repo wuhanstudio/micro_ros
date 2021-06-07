@@ -6,7 +6,7 @@
 #### Step 1: Starting micro-ros-agent using docker
 
 ```
-$docker run -it -v /dev:/dev --privileged microros/micro-ros-agent:foxy serial --dev /dev/ttyUSB0
+$ docker run -it -v /dev:/dev --privileged microros/micro-ros-agent:foxy serial --dev /dev/ttyUSB0
 ```
 #### Step 2: Starting microros publisher on RT-Thread
 ```
