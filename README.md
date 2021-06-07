@@ -28,7 +28,7 @@ Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0
 [1623057541.764331] info     | Root.cpp           | create_client            | create                 | client_key: 0x6F7B427A, session_id: 0x81
 [1623057541.764507] info     | SessionManager.hpp | establish_session        | session established    | client_key: 0x1870348922, address: 0
 ```
-And corresponding the topic:
+And the corresponding topic:
 
 ```
 $ docker exec -it YOUR_DOCKER_CONTAINER_NAME /bin/bash
