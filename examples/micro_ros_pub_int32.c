@@ -1,7 +1,8 @@
+#include <rtthread.h>
+
 #if defined MICRO_ROS_USE_SERIAL
 
 #include <micro_ros_rtt.h>
-#include <rtthread.h>
 #include <stdio.h>
 
 #include <rcl/rcl.h>
