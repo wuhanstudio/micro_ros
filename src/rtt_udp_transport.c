@@ -59,7 +59,11 @@ bool rtt_udp_transport_open(struct uxrCustomTransport * transport)
 
 bool rtt_udp_transport_close(struct uxrCustomTransport * transport)
 {
-    closesocket(sock);
+    if (sock >= 0)
+    {
+        closesocket(sock);
+    }
+
     return 1;
 }
 
