@@ -66,7 +66,7 @@ bool rtt_udp_transport_close(struct uxrCustomTransport * transport)
 size_t rtt_udp_transport_write(struct uxrCustomTransport * transport, const uint8_t *buf, size_t len, uint8_t *errcode)
 {
     sendto(sock, buf, len, 0, (struct sockaddr *)&server_addr, sizeof(struct sockaddr));
-    return 0;
+    return len;
 }
 
 size_t rtt_udp_transport_read(struct uxrCustomTransport * transport, uint8_t *buf, size_t len, int timeout, uint8_t *errcode)
