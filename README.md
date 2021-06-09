@@ -5,10 +5,21 @@
 
 #### Step 1: Starting micro-ros-agent using docker
 
+For serial port:
+
 ```
 $ docker run -it -v /dev:/dev --privileged microros/micro-ros-agent:foxy serial --dev /dev/ttyUSB0
 ```
+For udp port:
+
+```
+$ docker run -it 9999:9999/udp --privileged microros/micro-ros-agent:foxy udp4 -p 9999
+```
+
+
+
 #### Step 2: Starting microros publisher on RT-Thread
+
 ```
  \ | /
 - RT -     Thread Operating System
@@ -22,6 +33,8 @@ msh >microros_pub_int32
 [micro_ros] executor created
 [micro_ros] New thread mr_pubint32
 ```
+
+
 #### Step 3: Echoing messages
 
 Once connected, you should see the output:
@@ -47,7 +60,8 @@ data: 2
 data: 3
 ```
 
+
+
 #### Todo List
 
 - Add more examples
-- implement udp transport

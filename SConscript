@@ -23,17 +23,19 @@ if rtconfig.CROSS_TOOL == 'gcc':
 LIBS += ['microros']
 
 # The set of source files associated with this SConscript file.
-src     = Glob('src/*.c')
-src     += Glob('examples/*.c')
+src	= Glob('src/*.c')
 
-path   = [cwd]
-path   += [cwd + '/src']
+path	= [cwd]
+path	+= [cwd + '/src']
 
 if GetDepend('MICRO_ROS_USING_PUB_INT32'):
     src    += Glob('examples/micro_ros_pub_int32.c')
 
+if GetDepend('MICRO_ROS_USING_PUB_INT32_UDP'):
+    src    += Glob('examples/micro_ros_pub_int32_udp.c')
+
 LOCAL_CCFLAGS = ''
 
-group = DefineGroup('microros', src, depend = [''], CPPPATH = path, LOCAL_CCFLAGS = LOCAL_CCFLAGS, LIBS = LIBS, LIBPATH = LIBPATH)
+group = DefineGroup('microros', src, depend = ['PKG_USING_MICRO_ROS'], CPPPATH = path, LOCAL_CCFLAGS = LOCAL_CCFLAGS, LIBS = LIBS, LIBPATH = LIBPATH)
 
 Return('group')

@@ -1,12 +1,5 @@
 #include <rtthread.h>
 
-#if defined MICRO_ROS_USE_SERIAL
-
-#include "micro_ros_rtt.h"
-#include <stdio.h>
-#include <stdbool.h>
-#include <sys/time.h>
-
 // ---- Build fixes -----
 // undefined reference to `__ctype_ptr__' 
 #include <ctype.h>
@@ -54,6 +47,13 @@ char _ctype_b[128 + 256] = {
 char __EXPORT *__ctype_ptr__ = (char *) _ctype_b + 127;
 // ---- Build fixes -----
 
+#if defined MICRO_ROS_USE_SERIAL
+
+#include "micro_ros_rtt.h"
+#include <stdio.h>
+#include <stdbool.h>
+#include <sys/time.h>
+
 #define DBG_SECTION_NAME  "micro_ros_serial"
 #define DBG_LEVEL         DBG_LOG
 #include <rtdbg.h>
@@ -65,12 +65,6 @@ static rt_device_t micro_ros_serial;
 #ifndef MICRO_ROS_SERIAL_NAME
     #define MICRO_ROS_SERIAL_NAME "uart3"
 #endif
-
-// int clock_gettime(clockid_t unused, struct timespec *tp) __attribute__ ((weak));
-// bool rtt_transport_open(struct uxrCustomTransport * transport) __attribute__ ((weak));
-// bool rtt_transport_close(struct uxrCustomTransport * transport) __attribute__ ((weak));
-// size_t rtt_transport_write(struct uxrCustomTransport * transport, uint8_t *buf, size_t len, uint8_t *errcode) __attribute__ ((weak));
-// size_t rtt_transport_read(struct uxrCustomTransport * transport, uint8_t *buf, size_t len, int timeout, uint8_t *errcode) __attribute__ ((weak));
 
 // #define micro_rollover_useconds 4294967295
 

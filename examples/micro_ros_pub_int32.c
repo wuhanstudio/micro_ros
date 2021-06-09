@@ -1,3 +1,5 @@
+#if defined MICRO_ROS_USE_SERIAL
+
 #include <micro_ros_rtt.h>
 #include <rtthread.h>
 #include <stdio.h>
@@ -99,3 +101,5 @@ static void microros_pub_int32(int argc, char* argv[])
     }
 }
 MSH_CMD_EXPORT(microros_pub_int32, microros publish int32 example)
+
+#endif // MICRO_ROS_USE_SERIAL
