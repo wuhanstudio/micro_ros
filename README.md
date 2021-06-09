@@ -1,7 +1,7 @@
 # MicroROS on RT-Thread
 <img src="./docs/micro-ROS_big_logo.png" >
 
-> 默认使用 Cortex-M3 测试，已经实现和 ROS2 Foxy 的串口连接
+> By default, gcc 5.4.1 is used to generate static libraries in extras/library_generation/library_generation.sh
 
 #### Step 1: Starting micro-ros-agent using docker
 
@@ -44,6 +44,5 @@ data: 3
 
 #### Todo List
 
-- 更多 Example
-- 实现 UDP 连接
-- 测试更多 MCU:  Cortex-M0, Cortex-M4, Cortex-M7
+- Add more examples
+- implement udp transport
