@@ -7,6 +7,8 @@
 #include <stdbool.h>
 #include <sys/time.h>
 
+// ---- Build fixes -----
+// undefined reference to `__ctype_ptr__' 
 #include <ctype.h>
 #define _CTYPE_DATA_0_127 \
     _C, _C, _C, _C, _C, _C, _C, _C, \
@@ -50,7 +52,7 @@ char _ctype_b[128 + 256] = {
 };
 
 char __EXPORT *__ctype_ptr__ = (char *) _ctype_b + 127;
-
+// ---- Build fixes -----
 
 #define DBG_SECTION_NAME  "micro_ros_serial"
 #define DBG_LEVEL         DBG_LOG
