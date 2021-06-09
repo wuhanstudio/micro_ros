@@ -51,11 +51,7 @@ bool rtt_udp_transport_open(struct uxrCustomTransport * transport)
 
 bool rtt_udp_transport_close(struct uxrCustomTransport * transport)
 {
-    if (sock >= 0)
-    {
-        closesocket(sock);
-    }
-    return 1;
+    return closesocket(sock);;
 }
 
 size_t rtt_udp_transport_write(struct uxrCustomTransport * transport, const uint8_t *buf, size_t len, uint8_t *errcode)
