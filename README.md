@@ -10,6 +10,11 @@ $ docker run -it -v /dev:/dev --privileged microros/micro-ros-agent:foxy serial 
 ```
 #### Step 2: Starting microros publisher on RT-Thread
 ```
+ \ | /
+- RT -     Thread Operating System
+ / | \     4.0.4 build Jun  9 2021
+ 2006 - 2021 Copyright by rt-thread team
+msh >
 msh >microros_pub_int32
 [micro_ros] node created
 [micro_ros] publisher created
