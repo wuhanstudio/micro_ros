@@ -16,7 +16,8 @@ if [ $OPTIND -eq 1 ]; then
     PLATFORMS+=("teensy35")
     PLATFORMS+=("cortex_m0")
     PLATFORMS+=("cortex_m3")
-    # PLATFORMS+=("portenta-m4")
+    PLATFORMS+=("cortex-m4")
+    PLATFORMS+=("portenta-m4")
     PLATFORMS+=("portenta-m7")
 fi
 
@@ -137,19 +138,33 @@ if [[ " ${PLATFORMS[@]} " =~ " teensy4 " ]]; then
     cp -R firmware/build/libmicroros.a /project/src/imxrt1062/fpv5-d16-hard/libmicroros.a
 fi
 
-######## Build for Arduino Portenta M4 core ########
-# if [[ " ${PLATFORMS[@]} " =~ " portenta-m4 " ]]; then
-#     rm -rf firmware/build
+############# Build for Cortex M4 core ##############
+if [[ " ${PLATFORMS[@]} " =~ " cortex-m4 " ]]; then
+    rm -rf firmware/build
 
-#     export TOOLCHAIN_PREFIX=/uros_ws/gcc-arm-none-eabi-7-2017-q4-major/bin/arm-none-eabi-
-#     ros2 run micro_ros_setup build_firmware.sh /project/extras/library_generation/portenta-m4_toolchain.cmake /project/extras/library_generation/colcon.meta
+    export TOOLCHAIN_PREFIX=/uros_ws/gcc-arm-none-eabi-7-2017-q4-major/bin/arm-none-eabi-
+    ros2 run micro_ros_setup build_firmware.sh /project/extras/library_generation/cortex-m4_toolchain.cmake /project/extras/library_generation/colcon.meta
 
-#     find firmware/build/include/ -name "*.c"  -delete
-#     cp -R firmware/build/include/* /project/src/ 
+    find firmware/build/include/ -name "*.c"  -delete
+    cp -R firmware/build/include/* /project/src/ 
 
-#     mkdir -p /project/src/cortex-m4/fpv4-sp-d16-softfp
-#     cp -R firmware/build/libmicroros.a /project/src/cortex-m4/fpv4-sp-d16-softfp/libmicroros.a
-# fi
+    mkdir -p /project/src/cortex-m4/fpv4-sp-d16-hard
+    cp -R firmware/build/libmicroros.a /project/src/cortex-m4/fpv4-sp-d16-hard/libmicroros.a
+fi
+
+####### Build for Arduino Portenta M4 core ########
+if [[ " ${PLATFORMS[@]} " =~ " portenta-m4 " ]]; then
+    rm -rf firmware/build
+
+    export TOOLCHAIN_PREFIX=/uros_ws/gcc-arm-none-eabi-7-2017-q4-major/bin/arm-none-eabi-
+    ros2 run micro_ros_setup build_firmware.sh /project/extras/library_generation/portenta-m4_toolchain.cmake /project/extras/library_generation/colcon.meta
+
+    find firmware/build/include/ -name "*.c"  -delete
+    cp -R firmware/build/include/* /project/src/ 
+
+    mkdir -p /project/src/cortex-m4/fpv4-sp-d16-softfp
+    cp -R firmware/build/libmicroros.a /project/src/cortex-m4/fpv4-sp-d16-softfp/libmicroros.a
+fi
 
 ######## Build for Arduino Portenta M7 core ########
 if [[ " ${PLATFORMS[@]} " =~ " portenta-m7 " ]]; then

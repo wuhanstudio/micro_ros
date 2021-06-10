@@ -45,7 +45,7 @@ struct micro_ros_agent_locator {
     int port;
 };
 
-static inline void set_microros_udp_transports(char * agent_ip, uint agent_port){
+static inline void set_microros_udp_transports(char * agent_ip, uint32_t agent_port){
     static struct micro_ros_agent_locator locator;
     locator.address = agent_ip;
     locator.port = agent_port;

@@ -13,6 +13,10 @@ if rtconfig.CROSS_TOOL == 'gcc':
 		LIBPATH = [cwd + '/src/cortex-m0plus/']
 	if GetDepend('MICRO_ROS_USING_ARCH_CORTEX_M3'):
 		LIBPATH = [cwd + '/src/cortex-m3/']
+	if GetDepend('MICRO_ROS_USING_ARCH_CORTEX_M4_FPV4_SP_D16_SOFT'):
+		LIBPATH = [cwd + '/src/cortex-m4/fpv4-sp-d16-softfp']
+	if GetDepend('MICRO_ROS_USING_ARCH_CORTEX_M4_FPV4_SP_D16_HARD'):
+		LIBPATH = [cwd + '/src/cortex-m4/fpv4-sp-d16-hard']
 	if GetDepend('MICRO_ROS_USING_ARCH_CORTEX_M7_FPV5_D16_SOFT'):
 		LIBPATH = [cwd + '/src/cortex-m7/fpv5-d16-softfp']
 	if GetDepend('MICRO_ROS_USING_ARCH_CORTEX_M7_FPV5_SP_D16_SOFT'):
