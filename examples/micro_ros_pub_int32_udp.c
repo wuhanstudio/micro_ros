@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2006-2021, RT-Thread Development Team
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Change Logs:
+ * Date           Author       Notes
+ * 2021-06-11     hw630       the first version
+ */
+
 #include <rtthread.h>
 
 #if defined MICRO_ROS_USE_UDP
@@ -31,7 +41,8 @@ static void microros_pub_int32_thread_entry(void *parameter)
     }
 }
 
-static void microros_pub_int32_udp(int argc, char* argv[]) {
+static void microros_pub_int32_udp(int argc, char* argv[])
+{
     set_microros_udp_transports("192.168.199.100", 9999);
 
     allocator = rcl_get_default_allocator();
@@ -39,15 +50,15 @@ static void microros_pub_int32_udp(int argc, char* argv[]) {
     //create init_options
     if (rclc_support_init(&support, 0, NULL, &allocator) != RCL_RET_OK)
     {
-      rt_kprintf("[micro_ros] failed to initialize\n");
-      return;
+        rt_kprintf("[micro_ros] failed to initialize\n");
+        return;
     };
 
     // create node
     if (rclc_node_init_default(&node, "micro_ros_rtt_udp_node", "", &support) != RCL_RET_OK)
     {
-      rt_kprintf("[micro_ros] failed to create node\n");
-      return;
+        rt_kprintf("[micro_ros] failed to create node\n");
+        return;
     }
     rt_kprintf("[micro_ros] node created\n");
 
