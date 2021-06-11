@@ -9,7 +9,7 @@
 #include <sys/socket.h>
 #include <netdb.h>
 
-#define DBG_SECTION_NAME  "micro_ros_serial"
+#define DBG_SECTION_NAME  "micro_ros_udp"
 #define DBG_LEVEL         DBG_LOG
 #include <rtdbg.h>
 
