@@ -1,5 +1,10 @@
-# MicroROS on RT-Thread
+# MicroROS on RT-Thread (foxy)
 <img src="./docs/micro-ROS_big_logo.png" >
+
+Communication between the Micro-ROS Agent and the Micro-ROS nodes supports two types of transport:
+
+- UDP over IPv4 and IPv6.
+- Serial Port transports.
 
 > By default, gcc 5.4.1 is used to generate static libraries in extras/library_generation/library_generation.sh
 
