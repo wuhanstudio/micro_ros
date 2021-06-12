@@ -50,6 +50,9 @@ if GetDepend('MICRO_ROS_USING_ADD_INTS_SERVICE'):
 if GetDepend('MICRO_ROS_USING_DEINITIALIZATION'):
     src    += Glob('examples/micro_ros_deinitialization.c')
 
+if GetDepend('MICRO_ROS_USING_KOBUKI_CONTROL'):
+    src    += Glob('examples/micro_ros_kobuki_control.c')
+
 LOCAL_CCFLAGS = ''
 
 group = DefineGroup('microros', src, depend = ['PKG_USING_MICRO_ROS'], CPPPATH = path, LOCAL_CCFLAGS = LOCAL_CCFLAGS, LIBS = LIBS, LIBPATH = LIBPATH)

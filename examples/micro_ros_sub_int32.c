@@ -48,11 +48,15 @@ static void microros_sub_int32_thread_entry(void *parameter)
 
 static void microros_sub_int32(int argc, char* argv[])
 {
+#if defined MICRO_ROS_USE_SERIAL
     // Serial setup
-    set_microros_transports();
+     set_microros_transports();
+#endif
 
+#if defined MICRO_ROS_USE_UDP
     // UDP setup
-    // set_microros_udp_transports("192.168.199.100", 9999);
+     set_microros_udp_transports("192.168.199.100", 9999);
+#endif
 
     rt_pin_mode(LED_PIN, PIN_MODE_OUTPUT);
 

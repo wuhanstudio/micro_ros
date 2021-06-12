@@ -59,11 +59,15 @@ void service_callback(const void * req, void * res)
 
 static void microros_add_ints_service(int argc, char* argv[])
 {
+#if defined MICRO_ROS_USE_SERIAL
     // Serial setup
      set_microros_transports();
+#endif
 
+#if defined MICRO_ROS_USE_UDP
     // UDP setup
-    // set_microros_udp_transports("192.168.199.100", 9999);
+     set_microros_udp_transports("192.168.199.100", 9999);
+#endif
 
     allocator = rcl_get_default_allocator();
 

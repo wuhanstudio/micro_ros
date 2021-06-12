@@ -9,6 +9,7 @@
  */
 
 #include <micro_ros_rtt.h>
+#include <kobuki.h>
 
 #include <stdio.h>
 #include <rcl/rcl.h>
@@ -25,7 +26,22 @@ rcl_allocator_t allocator;
 rclc_support_t support;
 rcl_node_t node;
 
-static void microros_sub_twist_thread_entry(void *parameter)
+static struct kobuki robot;
+static double linear_x = 0;
+static double angular_z = 0;
+
+static void kobuki_entry(void *parameter)
+{
+    kobuki_init(&robot);
+    while(1)
+    {
+        rt_thread_mdelay(100);
+        kobuki_set_speed(linear_x, angular_z);
+    }
+    kobuki_close(&robot);
+}
+
+static void microros_kobuki_entry(void *parameter)
 {
     while(1)
     {
@@ -35,20 +51,18 @@ static void microros_sub_twist_thread_entry(void *parameter)
 }
 
 //twist message cb
-void subscription_callback(const void *msgin) {
-  // Please remember to enable -u_printf_float in compiler settings
-  const geometry_msgs__msg__Twist * msg = (const geometry_msgs__msg__Twist *)msgin;
-  printf("linear \n");
-  printf("  x: %f \n", msg->linear.x);
-  printf("  y: %f \n", msg->linear.y);
-  printf("  z: %f \n", msg->linear.z);
-  printf("angular \n");
-  printf("  x: %f \n", msg->angular.x);
-  printf("  y: %f \n", msg->angular.y);
-  printf("  z: %f \n", msg->angular.z);
+static void kobuki_callback(const void *msgin) {
+    // Please remember to enable -u_printf_float in compiler settings
+    const geometry_msgs__msg__Twist * msg = (const geometry_msgs__msg__Twist *)msgin;
+    printf("linear \n");
+    printf("  x: %f \n", msg->linear.x);
+    printf("angular \n");
+    printf("  z: %f \n", msg->angular.z);
+    linear_x = msg->linear.x;
+    angular_z = msg->angular.z;
 }
 
-static void microros_sub_twist(int argc, char* argv[])
+void microros_kobuki_control(int argc, char* argv[])
 {
 #if defined MICRO_ROS_USE_SERIAL
     // Serial setup
@@ -85,17 +99,28 @@ static void microros_sub_twist(int argc, char* argv[])
 
     // create executor
     rclc_executor_init(&executor, &support.context, 1, &allocator);
-    rclc_executor_add_subscription(&executor, &subscriber, &msg, &subscription_callback, ON_NEW_DATA);
+    rclc_executor_add_subscription(&executor, &subscriber, &msg, &kobuki_callback, ON_NEW_DATA);
 
-    rt_thread_t thread = rt_thread_create("mr_sub_twist", microros_sub_twist_thread_entry, RT_NULL, 2048, 25, 10);
+    rt_thread_t thread = rt_thread_create("mr_kobuki", microros_kobuki_entry, RT_NULL, 2048, 15, 10);
     if(thread != RT_NULL)
     {
         rt_thread_startup(thread);
-        rt_kprintf("[micro_ros] New thread mr_sub_twist\n");
+        rt_kprintf("[micro_ros] New thread mr_kobuki\n");
     }
     else
     {
-        rt_kprintf("[micro_ros] Failed to create thread mr_sub_twist\n");
+        rt_kprintf("[micro_ros] Failed to create thread mr_kobuki\n");
+    }
+
+    rt_thread_t threadk = rt_thread_create("kobuki", kobuki_entry, RT_NULL, 2048, 10, 10);
+    if(threadk != RT_NULL)
+    {
+        rt_thread_startup(threadk);
+        rt_kprintf("[micro_ros] New thread kobuki\n");
+    }
+    else
+    {
+        rt_kprintf("[micro_ros] Failed to create thread kobuki\n");
     }
 }
-MSH_CMD_EXPORT(microros_sub_twist, micro ros subscribe to twist example)
+MSH_CMD_EXPORT(microros_kobuki_control, micro ros control kobuki robot example)
