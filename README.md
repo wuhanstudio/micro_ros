@@ -69,6 +69,4 @@ data: 3
 
 #### Todo List
 
-- Add more examples
 - galactic support (TCP)
-
