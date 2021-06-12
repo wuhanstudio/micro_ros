@@ -38,6 +38,9 @@ if GetDepend('MICRO_ROS_USING_PUB_INT32'):
 if GetDepend('MICRO_ROS_USING_PUB_INT32_UDP'):
     src    += Glob('examples/micro_ros_pub_int32_udp.c')
 
+if GetDepend('MICRO_ROS_USING_PUB_INT32_TCP'):
+    src    += Glob('examples/micro_ros_pub_int32_tcp.c')
+
 if GetDepend('MICRO_ROS_USING_SUB_INT32'):
     src    += Glob('examples/micro_ros_sub_int32.c')
 
