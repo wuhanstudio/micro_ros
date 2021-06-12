@@ -71,10 +71,10 @@ void destroy_entities()
 static void microros_deinitialization(int argc, char* argv[])
 {
     // Serial setup
-    // set_microros_transports();
+    set_microros_transports();
 
     // UDP setup
-    set_microros_udp_transports("192.168.199.100", 9999);
+    // set_microros_udp_transports("192.168.199.100", 9999);
 
     msg.data = 0;
 

@@ -38,6 +38,18 @@ if GetDepend('MICRO_ROS_USING_PUB_INT32'):
 if GetDepend('MICRO_ROS_USING_PUB_INT32_UDP'):
     src    += Glob('examples/micro_ros_pub_int32_udp.c')
 
+if GetDepend('MICRO_ROS_USING_SUB_INT32'):
+    src    += Glob('examples/micro_ros_sub_int32.c')
+
+if GetDepend('MICRO_ROS_USING_SUB_TWIST'):
+    src    += Glob('examples/micro_ros_sub_twist.c')
+
+if GetDepend('MICRO_ROS_USING_ADD_INTS_SERVICE'):
+    src    += Glob('examples/micro_ros_add_ints_service.c')
+
+if GetDepend('MICRO_ROS_USING_DEINITIALIZATION'):
+    src    += Glob('examples/micro_ros_deinitialization.c')
+
 LOCAL_CCFLAGS = ''
 
 group = DefineGroup('microros', src, depend = ['PKG_USING_MICRO_ROS'], CPPPATH = path, LOCAL_CCFLAGS = LOCAL_CCFLAGS, LIBS = LIBS, LIBPATH = LIBPATH)

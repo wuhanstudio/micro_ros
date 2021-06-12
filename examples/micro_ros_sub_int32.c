@@ -30,7 +30,7 @@ rcl_timer_t timer;
 
 #define LED_PIN 45  // PC13
 
-void subscription_callback(const void * msgin)
+static void subscription_callback(const void * msgin)
 {
     const std_msgs__msg__Int32 * msg = (const std_msgs__msg__Int32 *)msgin;
     rt_kprintf("[micro_ros] received data %d\n", msg->data);
@@ -49,10 +49,10 @@ static void microros_sub_int32_thread_entry(void *parameter)
 static void microros_sub_int32(int argc, char* argv[])
 {
     // Serial setup
-    // set_microros_transports();
+    set_microros_transports();
 
     // UDP setup
-    set_microros_udp_transports("192.168.199.100", 9999);
+    // set_microros_udp_transports("192.168.199.100", 9999);
 
     rt_pin_mode(LED_PIN, PIN_MODE_OUTPUT);
 
