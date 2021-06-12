@@ -64,11 +64,3 @@ data: 2
 ---
 data: 3
 ```
-
-
-
-#### Todo List
-
-- Add more examples
-- galactic support (TCP)
-
