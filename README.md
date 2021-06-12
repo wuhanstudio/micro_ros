@@ -1,4 +1,4 @@
-# MicroROS on RT-Thread (foxy)
+# MicroROS on RT-Thread (galactic)
 <img src="./docs/micro-ROS_big_logo.png" >
 
 Communication between the Micro-ROS Agent and the Micro-ROS nodes supports two types of transport:
@@ -13,12 +13,12 @@ Communication between the Micro-ROS Agent and the Micro-ROS nodes supports two t
 For serial port:
 
 ```
-$ docker run -it -v /dev:/dev --privileged microros/micro-ros-agent:foxy serial --dev /dev/ttyUSB0
+$ docker run -it -v /dev:/dev --privileged microros/micro-ros-agent:galactic serial --dev /dev/ttyUSB0
 ```
 For udp port:
 
 ```
-$ docker run -it 9999:9999/udp --privileged microros/micro-ros-agent:foxy udp4 -p 9999
+$ docker run -it 9999:9999/udp --privileged microros/micro-ros-agent:galactic udp4 -p 9999
 ```
 
 
