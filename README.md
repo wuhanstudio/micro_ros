@@ -18,10 +18,8 @@ $ docker run -it -v /dev:/dev --privileged microros/micro-ros-agent:galactic ser
 For udp port:
 
 ```
-$ docker run -it 9999:9999/udp --privileged microros/micro-ros-agent:galactic udp4 -p 9999
+$ docker run -it -p 9999:9999/udp --privileged microros/micro-ros-agent:galactic udp4 -p 9999
 ```
-
-
 
 #### Step 2: Starting microros publisher on RT-Thread
 
@@ -38,7 +36,6 @@ msh >microros_pub_int32
 [micro_ros] executor created
 [micro_ros] New thread mr_pubint32
 ```
-
 
 #### Step 3: Echoing messages
 
@@ -64,4 +61,3 @@ data: 2
 ---
 data: 3
 ```
-
