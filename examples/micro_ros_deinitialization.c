@@ -52,7 +52,7 @@ void create_entities()
     rt_kprintf("[micro_ros] node created\n");
 
     // create publisher
-    rclc_publisher_init_best_effort(
+    rclc_publisher_init_default(
         &publisher,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
