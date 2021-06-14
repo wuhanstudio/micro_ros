@@ -26,7 +26,6 @@ rclc_executor_t executor;
 rclc_support_t support;
 rcl_allocator_t allocator;
 rcl_node_t node;
-rcl_timer_t timer;
 
 #define LED_PIN 45  // PC13
 
