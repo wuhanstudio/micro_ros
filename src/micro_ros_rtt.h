@@ -3,6 +3,7 @@
 #define MICRO_ROS_RTT
 
 #include <rtthread.h>
+#include <sys/time.h>
 
 // ---- Build fixes -----
 //Removing __attribute__ not supported by gcc-arm-none-eabi-5_4
