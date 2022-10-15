@@ -33,7 +33,7 @@ rtthread  code
 # 下载rtthread  （对于其他单片机，使用rtthread仓库）
 git clone https://github.com/RT-Thread-Studio/sdk-bsp-stm32h750-realthread-artpi.git
 # 进入目标bsp
-cd cd sdk-bsp-stm32h750-realthread-artpi/projects/art_pi_wifi/
+cd sdk-bsp-stm32h750-realthread-artpi/projects/art_pi_wifi/
 # art- pi 需要
 ln -s ../../libraries/ libraries
 ln -s ../../rt-thread/ rt-thread
@@ -88,7 +88,7 @@ if  CROSS_TOOL == 'gcc':
 ### 3. 编译microROS静态库
 
 ```bash
-cd microros/
+cd micro_ros/
 ./microros_library.sh
 ```
 
