@@ -1,0 +1,56 @@
+menu "micro-ROS For RT-Thread"
+    menuconfig MICROROS_TRANSPORT
+    	config USING_MICROROS
+    		bool "using microROS"
+    		default y
+    	select MICROROS_USE_SERIAL
+    	select MICROROS_USE_UDP
+    	if USING_MICROROS
+        	choice
+           	prompt "Select transport"
+              	default MICROROS_USE_SERIAL
+
+              	config MICROROS_USE_SERIAL
+                   bool "serial"
+
+               config MICROROS_USE_UDP
+                   bool "udp"
+        	endchoice
+        
+        	if MICROROS_USE_SERIAL
+       			config MICROROS_DEVIVE
+       				string "uart device"
+       				default "vcom"
+			endif
+			if MICROROS_USE_UDP
+				config MICROROS_IP
+					string "Agent IP"
+					default "192.168.31.130"
+				config MICROROS_PORT
+					int "UDP port"
+					range 1 65536
+					default 9999
+			endif
+       	endif		
+        	menu "example"
+        		config MICROS_EXAMPLE_PUB_INT32
+        			bool "select pub_int32"
+        			default y
+        		config MICROS_EXAMPLE_SUB_INT32
+        			bool "select sub_int32"
+        			default n 
+				config MICROS_EXAMPLE_PUB_SUB_INT32
+					bool "select pub_sub_int32"
+					default n
+				config MICROS_EXAMPLE_PING_PONG
+					bool "select ping pong"
+					default n
+				config MICROS_EXAMPLE_ADDTWOINTS_SERVER
+					bool "select service server"
+					default n
+				config MICROS_EXAMPLE_SUB_TWIST
+					bool "select sub_twist"
+					default n
+       		endmenu   	
+endmenu
+
