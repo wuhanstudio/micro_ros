@@ -6,7 +6,7 @@
 
 [2022开源之夏](https://summer-ospp.ac.cn/#/org/prodetail/22f330436)项目：microROS 添加 RT-Thread 支持。
 
-该分支可以实现在rtthread工程下构建microROS（galactic）静态库
+该分支可以实现在rtthread工程下构建microROS（humbel）静态库
 
 ## 依赖
 
@@ -113,3 +113,4 @@ docker run -it --rm -v /dev:/dev --privileged --net=host microros/micro-ros-agen
 # or
 docker run -it --rm -v /dev:/dev --privileged --net=host microros/micro-ros-agent:galactic udp4 --port 9999 -v6
 ```
+
