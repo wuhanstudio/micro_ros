@@ -1,7 +1,5 @@
 #include <rtthread.h>
 
-#if defined MICRO_ROS_USE_SERIAL
-
 #include <micro_ros_rtt.h>
 #include <stdio.h>
 
@@ -49,16 +47,6 @@ static void microros_pub_int32(int argc, char* argv[])
 #if defined MICRO_ROS_USE_SERIAL
     // Serial setup
      set_microros_transports();
-#endif
-
-#if defined MICRO_ROS_USE_TCP
-    // TCP setup
-     if(argc==2) {
-         set_microros_tcp_transports(argv[1], 9999);
-     }
-     else {
-     set_microros_tcp_transports("192.168.1.100", 9999);
-     }
 #endif
 
 #if defined MICRO_ROS_USE_UDP
@@ -125,5 +113,3 @@ static void microros_pub_int32(int argc, char* argv[])
     }
 }
 MSH_CMD_EXPORT(microros_pub_int32, microros publish int32 example)
-
-#endif // MICRO_ROS_USE_SERIAL
