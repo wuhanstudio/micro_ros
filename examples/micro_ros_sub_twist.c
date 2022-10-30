@@ -57,12 +57,12 @@ static void microros_sub_twist(int argc, char* argv[])
 
 #if defined MICRO_ROS_USE_TCP
     // TCP setup
-     set_microros_tcp_transports("192.168.199.100", 9999);
+     set_microros_tcp_transports("192.168.1.100", 9999);
 #endif
 
 #if defined MICRO_ROS_USE_UDP
     // UDP setup
-     set_microros_udp_transports("192.168.199.100", 9999);
+     set_microros_udp_transports("192.168.1.100", 9999);
 #endif
 
     allocator = rcl_get_default_allocator();
