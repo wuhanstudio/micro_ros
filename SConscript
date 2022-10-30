@@ -22,7 +22,7 @@ if rtconfig.CROSS_TOOL == 'gcc':
 	if GetDepend('MICRO_ROS_USING_ARCH_CORTEX_M7_FPV5_SP_D16_SOFT'):
 		LIBPATH = [cwd + '/src/cortex-m7/fpv5-sp-d16-softfp']
 	if GetDepend('MICRO_ROS_USING_ARCH_CORTEX_M7_FPV5_D16_HARD'):
-		LIBPATH = [cwd + '/src/imxrt1062/fpv5-d16-hard']
+		LIBPATH = [cwd + '/src/cortex-m7/fpv5-d16-hard']
 
 LIBS += ['microros']
 
@@ -34,9 +34,6 @@ path	+= [cwd + '/src']
 
 if GetDepend('MICRO_ROS_USING_PUB_INT32'):
     src    += Glob('examples/micro_ros_pub_int32.c')
-
-if GetDepend('MICRO_ROS_USING_PUB_INT32_UDP'):
-    src    += Glob('examples/micro_ros_pub_int32_udp.c')
 
 if GetDepend('MICRO_ROS_USING_SUB_INT32'):
     src    += Glob('examples/micro_ros_sub_int32.c')

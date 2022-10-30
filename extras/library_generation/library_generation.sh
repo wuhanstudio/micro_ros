@@ -91,8 +91,8 @@ if [[ " ${PLATFORMS[@]} " =~ " cortex_m4_sp_soft " ]]; then
     find firmware/build/include/ -name "*.c"  -delete
     cp -R firmware/build/include/* /project/src/
 
-    mkdir -p /project/src/cortex-m4-sp-soft
-    cp -R firmware/build/libmicroros.a /project/src/cortex-m4-sp-soft/libmicroros.a
+    mkdir -p /project/src/cortex-m4/fpv4-sp-d16-softfp
+    cp -R firmware/build/libmicroros.a /project/src/cortex-m4/fpv4-sp-d16-softfp/libmicroros.a
 fi
 
 ######## Build for STM32F4 ########
@@ -104,8 +104,8 @@ if [[ " ${PLATFORMS[@]} " =~ " cortex_m4_sp_hard " ]]; then
     find firmware/build/include/ -name "*.c"  -delete
     cp -R firmware/build/include/* /project/src/
 
-    mkdir -p /project/src/cortex-m4-sp-hard
-    cp -R firmware/build/libmicroros.a /project/src/cortex-m4-sp-hard/libmicroros.a
+    mkdir -p /project/src/cortex-m4/fpv4-sp-d16-hard
+    cp -R firmware/build/libmicroros.a /project/src/cortex-m4/fpv4-sp-d16-hard/libmicroros.a
 fi
 
 ######## Build for STM32F7 ########
@@ -117,8 +117,8 @@ if [[ " ${PLATFORMS[@]} " =~ " cortex_m7_soft " ]]; then
     find firmware/build/include/ -name "*.c"  -delete
     cp -R firmware/build/include/* /project/src/
 
-    mkdir -p /project/src/cortex-m7-soft
-    cp -R firmware/build/libmicroros.a /project/src/cortex-m7-soft/libmicroros.a
+    mkdir -p /project/src/cortex-m7/fpv5-d16-softfp
+    cp -R firmware/build/libmicroros.a /project/src/cortex-m7/fpv5-d16-softfp/libmicroros.a
 fi
 
 ######## Build for STM32F7 ########
@@ -130,8 +130,8 @@ if [[ " ${PLATFORMS[@]} " =~ " cortex_m7_hard " ]]; then
     find firmware/build/include/ -name "*.c"  -delete
     cp -R firmware/build/include/* /project/src/
 
-    mkdir -p /project/src/cortex-m7-hard
-    cp -R firmware/build/libmicroros.a /project/src/cortex-m7-hard/libmicroros.a
+    mkdir -p /project/src/cortex-m7/fpv5-d16-hard
+    cp -R firmware/build/libmicroros.a /project/src/cortex-m7/fpv5-d16-hard/libmicroros.a
 fi
 
 ######## Build for STM32F7 ########
@@ -143,8 +143,8 @@ if [[ " ${PLATFORMS[@]} " =~ " cortex_m7_sp_soft " ]]; then
     find firmware/build/include/ -name "*.c"  -delete
     cp -R firmware/build/include/* /project/src/
 
-    mkdir -p /project/src/cortex-m7-sp-soft
-    cp -R firmware/build/libmicroros.a /project/src/cortex-m7-sp-soft/libmicroros.a
+    mkdir -p /project/src/cortex-m7/fpv5-sp-d16-softfp
+    cp -R firmware/build/libmicroros.a /project/src/cortex-m7/fpv5-sp-d16-softfp/libmicroros.a
 fi
 
 ######## Build for STM32F7 ########
@@ -156,8 +156,8 @@ if [[ " ${PLATFORMS[@]} " =~ " cortex_m7_sp_hard " ]]; then
     find firmware/build/include/ -name "*.c"  -delete
     cp -R firmware/build/include/* /project/src/
 
-    mkdir -p /project/src/cortex-m7-sp-hard
-    cp -R firmware/build/libmicroros.a /project/src/cortex-m7-sp-hard/libmicroros.a
+    mkdir -p /project/src/cortex-m7/fpv5-sp-d16-hard
+    cp -R firmware/build/libmicroros.a /project/src/cortex-m7/fpv5-sp-d16-hard/libmicroros.a
 fi
 
 
