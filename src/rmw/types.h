@@ -415,7 +415,7 @@ enum RMW_PUBLIC_TYPE rmw_qos_durability_policy_t
   "Use RMW_QOS_POLICY_LIVELINESS_MANUAL_BY_TOPIC if manually asserted liveliness is needed."
 
 #ifndef _WIN32
-# define RMW_DECLARE_DEPRECATED(name, msg) name __attribute__((deprecated(msg)))
+# define RMW_DECLARE_DEPRECATED(name, msg) name
 #else
 # define RMW_DECLARE_DEPRECATED(name, msg) name __pragma(deprecated(name))
 #endif
