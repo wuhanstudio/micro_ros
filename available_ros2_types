@@ -204,6 +204,7 @@ test_interface_files/Arrays.msg
 test_interface_files/Arrays.srv
 test_interface_files/BasicTypes.msg
 test_interface_files/BasicTypes.srv
+test_interface_files/BoundedPlainSequences.msg
 test_interface_files/BoundedSequences.msg
 test_interface_files/Constants.msg
 test_interface_files/Defaults.msg
@@ -237,3 +238,5 @@ visualization_msgs/InteractiveMarkerUpdate.msg
 visualization_msgs/Marker.msg
 visualization_msgs/MarkerArray.msg
 visualization_msgs/MenuEntry.msg
+visualization_msgs/MeshFile.msg
+visualization_msgs/UVCoordinate.msg
