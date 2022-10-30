@@ -50,6 +50,24 @@ rosidl_runtime_c__String
 micro_ros_string_utilities_init(const char * data);
 
 /**
+ *  Create a rosidl_runtime_c__String from a size
+ *
+ * <hr>
+ * Attribute          | Adherence
+ * ------------------ | -------------
+ * Allocates Memory   | Yes
+ * Thread-Safe        | No
+ * Uses Atomics       | No
+ * Lock-Free          | Yes
+ *
+ * \param[in] size size of the required string
+ * \return `rosidl_runtime_c__String` string of size size
+ */
+MICRO_ROS_UTILITIES_PUBLIC
+rosidl_runtime_c__String
+micro_ros_string_utilities_init_with_size(const size_t size);
+
+/**
  *  Create a rosidl_runtime_c__String from a char pointer
  *
  * <hr>
@@ -66,7 +84,7 @@ micro_ros_string_utilities_init(const char * data);
  */
 MICRO_ROS_UTILITIES_PUBLIC
 rosidl_runtime_c__String
-micro_ros_string_utilities_set(rosidl_runtime_c__String str, const char * data);
+micro_ros_string_utilities_set(const rosidl_runtime_c__String str, const char * data);
 
 /**
  *  Returns the char pointer to the rosidl_runtime_c__String data
@@ -84,7 +102,7 @@ micro_ros_string_utilities_set(rosidl_runtime_c__String str, const char * data);
  */
 MICRO_ROS_UTILITIES_PUBLIC
 const char *
-micro_ros_string_utilities_get_c_str(rosidl_runtime_c__String str);
+micro_ros_string_utilities_get_c_str(const rosidl_runtime_c__String str);
 
 /**
  *  Appends a char pointer to the end of a rosidl_runtime_c__String
@@ -102,7 +120,7 @@ micro_ros_string_utilities_get_c_str(rosidl_runtime_c__String str);
  * \return `rosidl_runtime_c__String` new string
  */
 rosidl_runtime_c__String micro_ros_string_utilities_append(
-  rosidl_runtime_c__String str,
+  const rosidl_runtime_c__String str,
   const char * data);
 
 /**
@@ -123,7 +141,7 @@ rosidl_runtime_c__String micro_ros_string_utilities_append(
 MICRO_ROS_UTILITIES_PUBLIC
 rosidl_runtime_c__String
 micro_ros_string_utilities_remove_tail_chars(
-  rosidl_runtime_c__String str,
+  const rosidl_runtime_c__String str,
   const size_t n);
 
 /**
@@ -141,7 +159,7 @@ micro_ros_string_utilities_remove_tail_chars(
  */
 MICRO_ROS_UTILITIES_PUBLIC
 void
-micro_ros_string_utilities_destroy(rosidl_runtime_c__String * str);
+micro_ros_string_utilities_destroy(rosidl_runtime_c__String * const str);
 
 /** @}*/
 
