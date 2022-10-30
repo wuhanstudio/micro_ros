@@ -1,7 +1,5 @@
 #include <rtthread.h>
 
-#if defined MICRO_ROS_USE_SERIAL
-
 #include <micro_ros_rtt.h>
 #include <stdio.h>
 
@@ -51,14 +49,14 @@ static void microros_pub_int32(int argc, char* argv[])
      set_microros_transports();
 #endif
 
-#if defined MICRO_ROS_USE_TCP
-    // TCP setup
-     set_microros_tcp_transports("192.168.1.100", 9999);
-#endif
-
 #if defined MICRO_ROS_USE_UDP
     // UDP setup
-     set_microros_udp_transports("192.168.1.100", 9999);
+     if(argc==2) {
+         set_microros_udp_transports(argv[1], 9999);
+     }
+     else {
+         set_microros_udp_transports("192.168.1.100", 9999);
+     }
 #endif
 
     allocator = rcl_get_default_allocator();
@@ -115,5 +113,3 @@ static void microros_pub_int32(int argc, char* argv[])
     }
 }
 MSH_CMD_EXPORT(microros_pub_int32, microros publish int32 example)
-
-#endif // MICRO_ROS_USE_SERIAL

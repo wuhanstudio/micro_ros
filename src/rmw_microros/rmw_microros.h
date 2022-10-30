@@ -25,14 +25,19 @@
 #include <rmw_microros/init_options.h>
 #include <rmw_microros/time_sync.h>
 #include <rmw_microros/ping.h>
+#include <rmw_microros/timing.h>
 
-#ifdef RMW_UXRCE_TRANSPORT_UDP
+#if defined(RMW_UXRCE_TRANSPORT_UDP) || defined(RMW_UXRCE_TRANSPORT_TCP)
 #include <rmw_microros/discovery.h>
 #endif  // RMW_UXRCE_TRANSPORT_UDP
 
 #ifdef RMW_UXRCE_TRANSPORT_CUSTOM
 #include <rmw_microros/custom_transport.h>
 #endif  // RMW_UXRCE_TRANSPORT_CUSTOM
+
+#ifdef RMW_UROS_ERROR_HANDLING
+#include <rmw_microros/error_handling.h>
+#endif  // RMW_UROS_ERROR_HANDLING
 
 #if defined(__cplusplus)
 extern "C"
@@ -51,7 +56,7 @@ typedef struct rmw_uxrce_transport_params_t
 {
 #if defined(RMW_UXRCE_TRANSPORT_SERIAL)
   char serial_device[MAX_SERIAL_DEVICE];
-#elif defined(RMW_UXRCE_TRANSPORT_UDP)
+#elif defined(RMW_UXRCE_TRANSPORT_UDP) || defined(RMW_UXRCE_TRANSPORT_TCP)
   char agent_address[MAX_IP_LEN];
   char agent_port[MAX_PORT_LEN];
 #elif defined(RMW_UXRCE_TRANSPORT_CUSTOM)

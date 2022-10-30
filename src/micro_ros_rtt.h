@@ -33,36 +33,6 @@ static inline void set_microros_transports(){
 
 #endif  // MICRO_ROS_USE_SERIAL
 
-#if defined MICRO_ROS_USE_TCP
-
-bool   rtt_tcp_transport_open(struct uxrCustomTransport * transport);
-bool   rtt_tcp_transport_close(struct uxrCustomTransport * transport);
-size_t rtt_tcp_transport_write(struct uxrCustomTransport* transport, const uint8_t * buf, size_t len, uint8_t * err);
-size_t rtt_tcp_transport_read(struct uxrCustomTransport* transport, uint8_t* buf, size_t len, int timeout, uint8_t* err);
-int clock_gettime(clockid_t unused, struct timespec *tp);
-
-struct micro_ros_agent_locator {
-    char* address;
-    int port;
-};
-
-static inline void set_microros_tcp_transports(char * agent_ip, uint32_t agent_port){
-    static struct micro_ros_agent_locator locator;
-    locator.address = agent_ip;
-    locator.port = agent_port;
-
-    rmw_uros_set_custom_transport(
-        false,
-        (void *) &locator,
-        rtt_tcp_transport_open,
-        rtt_tcp_transport_close,
-        rtt_tcp_transport_write,
-        rtt_tcp_transport_read
-    );
-}
-
-#endif  // MICRO_ROS_USE_TCP
-
 #if defined MICRO_ROS_USE_UDP
 
 bool   rtt_udp_transport_open(struct uxrCustomTransport * transport);

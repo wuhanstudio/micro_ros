@@ -415,7 +415,7 @@ enum RMW_PUBLIC_TYPE rmw_qos_durability_policy_t
   "Use RMW_QOS_POLICY_LIVELINESS_MANUAL_BY_TOPIC if manually asserted liveliness is needed."
 
 #ifndef _WIN32
-# define RMW_DECLARE_DEPRECATED(name, msg) name __attribute__((deprecated(msg)))
+# define RMW_DECLARE_DEPRECATED(name, msg) name
 #else
 # define RMW_DECLARE_DEPRECATED(name, msg) name __pragma(deprecated(name))
 #endif
@@ -435,7 +435,9 @@ enum RMW_PUBLIC_TYPE rmw_qos_liveliness_policy_t
   /// Explicitly asserting node liveliness is required in this case.
   /// This option is deprecated, use RMW_QOS_POLICY_LIVELINESS_MANUAL_BY_TOPIC if your application
   /// requires to assert liveliness manually.
-    RMW_QOS_POLICY_LIVELINESS_MANUAL_BY_NODE = 2,
+  RMW_DECLARE_DEPRECATED(
+    RMW_QOS_POLICY_LIVELINESS_MANUAL_BY_NODE,
+    RMW_QOS_POLICY_LIVELINESS_MANUAL_BY_NODE_DEPRECATED_MSG) = 2,
 
   /// The signal that establishes a Topic is alive is at the Topic level. Only publishing a message
   /// on the Topic or an explicit signal from the application to assert liveliness on the Topic
