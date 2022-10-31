@@ -23,6 +23,8 @@ if rtconfig.CROSS_TOOL == 'gcc':
 		LIBPATH = [cwd + '/src/cortex-m7/fpv5-sp-d16-softfp']
 	if GetDepend('MICRO_ROS_USING_ARCH_CORTEX_M7_FPV5_D16_HARD'):
 		LIBPATH = [cwd + '/src/cortex-m7/fpv5-d16-hard']
+	if GetDepend('MICRO_ROS_USING_ARCH_CORTEX_M7_FPV5_SP_D16_HARD'):
+		LIBPATH = [cwd + '/src/cortex-m7/fpv5-sp-d16-hard']
 
 LIBS += ['microros']
 
