@@ -2,7 +2,7 @@
 #include <rtthread.h>
 #include <rtdevice.h>
 #include <micro_ros_rtt.h>
-#if defined  MICROS_EXAMPLE_PUB_SUB_INT32
+
 #include <rcl/rcl.h>
 #include <rcl/error_handling.h>
 #include <rclc/rclc.h>
@@ -55,14 +55,19 @@ static void microros_pub_sub_thread_entry(void *parameter)
 
 static void microros_pub_sub(int argc, char* argv[])
 {
-    #if defined MICROROS_SERIAL
+#if defined MICRO_ROS_USE_SERIAL
     // Serial setup
      set_microros_transports();
 #endif
 
-#if defined MICROROS_UDP
-    // TCP setup
-     set_microros_udp_transports("192.163.31.130", 9999);
+#if defined MICRO_ROS_USE_UDP
+    // UDP setup
+     if(argc==2) {
+         set_microros_udp_transports(argv[1], 9999);
+     }
+     else {
+         set_microros_udp_transports("192.168.1.100", 9999);
+     }
 #endif
 
 	allocator = rcl_get_default_allocator();
@@ -111,6 +116,5 @@ static void microros_pub_sub(int argc, char* argv[])
 
 }
 MSH_CMD_EXPORT(microros_pub_sub, microros pub_sub example)
-#endif
 
 // ros2 topic pub -r  2 /int32_subscriber std_msgs/msg/Int32 data:\ 0 
